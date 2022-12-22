@@ -11,12 +11,7 @@ public class Main {
 
     public static void main(String[] args) {
         List<Tas> taslar = taslariOlustur();
-        System.out.println(taslar);
-        System.out.println(taslar.size());
-
         okeyBelirle(taslar);
-
-        System.out.println("Gösterge çıkarıldıktan sonra taş sayısı: " + taslar.size());
 
         List<Oyuncu> oyuncular = new ArrayList<>();
         oyuncular.add(new Oyuncu(1));
@@ -25,16 +20,31 @@ public class Main {
         oyuncular.add(new Oyuncu(4));
 
 
-        System.out.println(taslariDagit(oyuncular, taslar));
+        taslariDagit(oyuncular, taslar);
 
         taslariSirala(oyuncular);
-        for(Oyuncu o : oyuncular) {
-            System.out.println(o.getIsteka());
-        }
 
         ciftKontrolEt(oyuncular);
-        System.out.println(oyuncular);
-        ayniRenkSiraliKontrolEt(oyuncular);
+
+
+        Map<Integer, Integer> kalanTaslar = new HashMap<>();
+        for(Oyuncu oyuncu : oyuncular){
+            int key = oyuncu.getOyuncuNumarasi();
+            int value = oyuncu.getCiftKullanilmayanTasSayisi();
+            kalanTaslar.put(key, value);
+        }
+
+        System.out.println(kalanTaslar);
+
+        List<Integer> kalanTaslarListe = new ArrayList<>(kalanTaslar.values());
+        kalanTaslarListe.sort(Comparator.naturalOrder());
+        int min = kalanTaslarListe.get(0);
+        List<Integer> kazananOyuncular = kalanTaslar.entrySet().stream().filter(e -> e.getValue() == min).map(Map.Entry::getKey).toList();
+
+        System.out.println("Çift Dizilime Göre Bitmeye En Yakın Olan Oyuncu/Oyuncular:");
+        for(Integer kazanan : kazananOyuncular){
+            System.out.println(kazanan + " Numaralı Oyuncu");
+        }
     }
 
     public static List<Tas> taslariOlustur(){
@@ -90,11 +100,11 @@ public class Main {
                 break;
             }
         }
-        System.out.println("---------------------------------------------");
+        /*System.out.println("---------------------------------------------");
         System.out.println(gosterge);
         System.out.println("---------------------------------------------");
         System.out.println(okey);
-        System.out.println("---------------------------------------------");
+        System.out.println("---------------------------------------------");*/
     }
 
     public static List<Oyuncu> taslariDagit(List<Oyuncu> oyuncular, List<Tas> butunTaslar) {
@@ -164,7 +174,7 @@ public class Main {
         }
     }
 
-    public static void ayniRenkSiraliKontrolEt(List<Oyuncu> oyuncular) {
+    /*public static void ayniRenkSiraliKontrolEt(List<Oyuncu> oyuncular) {
 
         for(Oyuncu oyuncu : oyuncular){
             Map<String, List<Tas>> map = new HashMap<String, List<Tas>>();
@@ -184,15 +194,19 @@ public class Main {
 
             for (String renk : RENKLER){
                 List<Tas> seriler = new ArrayList<Tas>();
-                for (int i=0; i<map.get(renk).size()-1; i++){
+                if(map.get(renk).size() > 2){
+                    for (int i=1; i<map.get(renk).size(); i++){
+
+                }
+
                     
                 }
             }
         }
 
-    }
+    }*/
 
-    public static void ayniSayiFarkliRenkKontrolEt(List<Oyuncu> oyuncular) {
+    /*public static void ayniSayiFarkliRenkKontrolEt(List<Oyuncu> oyuncular) {
 
-    }
+    }*/
 }

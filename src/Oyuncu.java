@@ -6,8 +6,8 @@ public class Oyuncu {
     private List<Tas> isteka;
     private int ciftSayisi;
     private int seriSayisi;
-    private int ciftKullanilmayanTasSayisi;
-    private int seriKullanilmayanTasSayisi;
+    private int ciftKullanilmayanTasSayisi;//Çift dizilimde oyuncunun istekasında kalan kullanılmayan taş sayısı
+    private int seriKullanilmayanTasSayisi;//Seri dizilimde oyuncunun istekasında kalan kullanılmayan taş sayısı
 
     public Oyuncu() {}
 
